@@ -7,8 +7,13 @@ using namespace std;
         Graph::Graph(int numberOfVertices) : G(numberOfVertices, vector<int>(numberOfVertices)){};
 
         void Graph::includeEdge(int u, int v){
-            G[u][v] = 1;        //undirected graph
+            G[u][v] = 1;        //undirected graph for now
             G[v][u] = 1;
+        }
+
+        void Graph::removeEdge(int u, int v){
+            G[u][v] = 0;
+            G[v][u] = 0;
         }
 
         void Graph::print(){
