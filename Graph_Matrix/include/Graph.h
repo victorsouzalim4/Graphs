@@ -13,6 +13,8 @@ class Graph {
         Graph();
         Graph(int numberOfVertices);
 
+        void includeEdge(int u, int v);
+
         void print();
 
 };
