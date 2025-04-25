@@ -1,23 +1,18 @@
 #include <vector>
 #include <iostream>
+#include "Graph.h"
 using namespace std;
 
-class Graph{
-    vector<vector<int>> G;
+        Graph::Graph() : G(3, vector<int>(3)){}
+        Graph::Graph(int numberOfVertices) : G(numberOfVertices, vector<int>(numberOfVertices)){};
 
-    public:
-
-        Graph() : G(3, vector<int>(3)){
-            
-        }
-
-        void Print(){
+        void Graph::print(){
             for(int i = 0; i < G.size(); i++ ){
                 for(int j = 0; j < G[0].size(); j++){
-                    cout << G[i][j];
+                    cout << G[i][j] << " ";
                 }
+                cout << "\n";
             }
         }
 
 
-};
