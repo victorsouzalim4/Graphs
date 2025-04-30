@@ -8,6 +8,7 @@ using namespace std;
 class Graph {
    private:
     vector<vector<int>> G;
+
 };
 
 #endif
