@@ -1,4 +1,24 @@
 #include "DirectedGraph.h"
 
+#include <string>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
+using namespace std;
+
+void DirectedGraph::addEdge(const string& from, const string& to) {
+    if (!labelToIndex.count(from)) {
+        throw invalid_argument("Origin vertex'" + from + "' does not exists.");
+    }
+    if (!labelToIndex.count(to)) {
+        throw invalid_argument("Destiny vertex '" + to + "' does not exists.");
+    }
+
+    int indexFrom = labelToIndex[from];
+    int indexTo = labelToIndex[to];
+    adjList[indexFrom].push_back(indexTo);
+}
 

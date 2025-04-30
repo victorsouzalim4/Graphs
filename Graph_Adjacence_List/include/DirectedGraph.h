@@ -3,6 +3,7 @@
 #define GRAPH_INTERNAL_ACCESS
 
 #include "Graph.h"
+#include <string>
 
 class DirectedGraph : public Graph {
    public:

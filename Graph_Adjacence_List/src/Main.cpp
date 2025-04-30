@@ -1,16 +1,25 @@
 #include <iostream>
-#include "UndirectedGraph.h"
+#include "DirectedGraph.h"
 #include "Vertex.h"
 
 using namespace std;
 
 int main(){
 
-    UndirectedGraph g;
+    DirectedGraph g;
 
     g.addVertex("A");
     g.addVertex("B");
     g.addVertex("C");
+
+
+    try {
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("A", "F");
+    } catch (const invalid_argument& e) {
+        cout << "Erro ao adicionar aresta: " << e.what() << endl;
+    }
 
     g.print();
 

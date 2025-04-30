@@ -1,14 +1,13 @@
 #define GRAPH_INTERNAL_ACCESS
 
 #include "Graph.h"
+#include "Vertex.h"
 
 #include <iostream>
 #include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
-
-#include "Vertex.h"
 
 using namespace std;
 
@@ -34,7 +33,7 @@ void Graph::print() const {
     for(int i = 0; i < adjList.size(); i++){
         cout << vertices[i].label << ": ";
         for(int j = 0; j < adjList[i].size(); j++ ){
-            cout << adjList[i][j] << " ";
+            cout << vertices[adjList[i][j]].label << " ";
         }
         cout << "\n";
     }
