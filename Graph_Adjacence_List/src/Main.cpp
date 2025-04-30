@@ -14,7 +14,7 @@ int main(){
 
 
     try {
-        g.addEdge("A", "B");
+        g.addEdge("A", "B", 3);
         g.addEdge("A", "C");
         g.addEdge("A", "F");
     } catch (const invalid_argument& e) {

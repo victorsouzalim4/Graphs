@@ -11,12 +11,13 @@
 #include <memory>
 #include <unordered_map>
 #include "Vertex.h"
+#include "Edge.h"
 
 using namespace std;
 
 class Graph {
     protected:
-        vector<vector<int>> adjList;                      
+        vector<vector<Edge>> adjList;                      
         vector<Vertex> vertices;                               
         unordered_map<string, int> labelToIndex;    // converte label em indice para add na adjList
 

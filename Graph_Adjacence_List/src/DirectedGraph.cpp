@@ -6,10 +6,11 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include "Edge.h"
 
 using namespace std;
 
-void DirectedGraph::addEdge(const string& from, const string& to) {
+void DirectedGraph::addEdge(const string& from, const string& to, double weight) {
     if (!labelToIndex.count(from)) {
         throw invalid_argument("Origin vertex'" + from + "' does not exists.");
     }
@@ -19,6 +20,8 @@ void DirectedGraph::addEdge(const string& from, const string& to) {
 
     int indexFrom = labelToIndex[from];
     int indexTo = labelToIndex[to];
-    adjList[indexFrom].push_back(indexTo);
+    Edge e(indexTo, weight);
+
+    adjList[indexFrom].push_back(e);
 }
 

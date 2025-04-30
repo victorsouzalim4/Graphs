@@ -7,7 +7,7 @@
 
 class DirectedGraph : public Graph {
    public:
-    void addEdge(const string& from, const string& to);
+    void addEdge(const string& from, const string& to, double weight = 1.0);
 };
 
 #endif

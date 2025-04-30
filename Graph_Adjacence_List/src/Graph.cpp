@@ -33,7 +33,7 @@ void Graph::print() const {
     for(int i = 0; i < adjList.size(); i++){
         cout << vertices[i].label << ": ";
         for(int j = 0; j < adjList[i].size(); j++ ){
-            cout << vertices[adjList[i][j]].label << " ";
+            cout << "(" << vertices[adjList[i][j].to].label << ", " << adjList[i][j].weight << "); ";
         }
         cout << "\n";
     }
