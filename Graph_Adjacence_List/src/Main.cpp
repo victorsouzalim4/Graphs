@@ -1,12 +1,12 @@
 #include <iostream>
-#include "Graph.h"
+#include "UndirectedGraph.h"
 #include "Vertex.h"
 
 using namespace std;
 
 int main(){
 
-    Graph g;
+    UndirectedGraph g;
 
     g.addVertex("A");
     g.addVertex("B");

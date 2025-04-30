@@ -1,3 +1,5 @@
+#define GRAPH_INTERNAL_ACCESS
+
 #include "Graph.h"
 
 #include <iostream>
@@ -27,20 +29,6 @@ int Graph::addVertex(const string& label, double heuristicWeight){
     return index;
 }
 
-int Graph::addVertex(const string& label){
-    if(labelToIndex.count(label)){
-        return labelToIndex[label];
-    }
-
-    int index = vertices.size();
-
-    Vertex v(label, 0);
-    vertices.push_back(v);
-    labelToIndex[label] = index;
-    adjList.emplace_back();
-
-    return index;
-}
 
 void Graph::print() const {
     for(int i = 0; i < adjList.size(); i++){
