@@ -14,6 +14,7 @@ class Graph {
     Graph(int numberOfVertices);
 
     void includeEdge(int u, int v);
+    void includeEdge(int u, int v, int w);
     void removeEdge(int u, int v);
 
     void print();

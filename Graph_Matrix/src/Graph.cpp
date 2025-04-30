@@ -10,8 +10,18 @@ Graph::Graph(int numberOfVertices)
 
 void Graph::includeEdge(int u, int v) {
     try {
-        G.at(u).at(v) = 1;  // undirected graph for now
+        G.at(u).at(v) = 1;  
         G.at(v).at(u) = 1;
+    } catch (const std::exception& e) {
+        cout << "ERROR: ";
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void Graph::includeEdge(int u, int v, int w) {
+    try {
+        G.at(u).at(v) = w;  
+        G.at(v).at(u) = w;
     } catch (const std::exception& e) {
         cout << "ERROR: ";
         std::cerr << e.what() << '\n';
