@@ -2,6 +2,7 @@
 #define VERTEX_H
 
 #include <string>
+
 using namespace std;
 
 class Vertex {

@@ -1,13 +1,18 @@
 #include <iostream>
 #include "Graph.h"
 #include "Vertex.h"
+
 using namespace std;
 
 int main(){
 
-    Vertex* v = new Vertex("A");
+    Graph g;
 
-    cout << v->label;
+    g.addVertex("A");
+    g.addVertex("B");
+    g.addVertex("C");
+
+    g.print();
 
     return 0;
 }
