@@ -20,6 +20,7 @@ class Graph {
         vector<vector<Edge>> adjList;                      
         vector<Vertex> vertices;                               
         unordered_map<string, int> labelToIndex;    // converte label em indice para add na adjList
+        int len;
 
         Graph();
 
@@ -27,7 +28,8 @@ class Graph {
 
         virtual int addVertex(const string& label, double heuristicWeight = 0.0);
         // void addEdge(const string& from, const string& to);
-        // void removeVertex(const string& label);
+        void removeVertex(const string& label);
+        int getLenght();
         void print() const;
 
 };

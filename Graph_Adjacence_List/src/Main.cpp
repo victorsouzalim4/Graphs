@@ -16,12 +16,14 @@ int main(){
     try {
         g.addEdge("A", "B", 3.5);
         g.addEdge("A", "C");
-        g.addEdge("A", "F");
+        g.print();
+        g.removeVertex("B");
+
     } catch (const invalid_argument& e) {
         cout << "Erro ao adicionar aresta: " << e.what() << endl;
     }
 
-    g.print();
+
 
     return 0;
 }
