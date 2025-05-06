@@ -9,6 +9,7 @@ class Vertex {
     public:
         string label;
         double heuristicWeight;
+        bool active;
 
         Vertex(string l);
         Vertex(string l, double hw);
