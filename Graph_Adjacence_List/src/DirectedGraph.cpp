@@ -27,18 +27,26 @@ void DirectedGraph::addEdge(const string& from, const string& to, double weight)
 
 }
 
-void DirectedGraph::removeEdge(const string& originLabel, const string& destinyLabel){
-    if(!labelToIndex.count(originLabel) || !labelToIndex.count(destinyLabel)){
-        throw invalid_argument("Vertex does not exists.");
+void DirectedGraph::removeEdge(const string& from, const string& to){
+    if (!labelToIndex.count(from)) {
+        throw invalid_argument("Origin vertex'" + from + "' does not exists.");
+    }
+    if (!labelToIndex.count(to)) {
+        throw invalid_argument("Destiny vertex '" + to + "' does not exists.");
     }
 
-    int originIndex = labelToIndex[originLabel];
-    int destinyIndex = labelToIndex[destinyLabel];
+    int indexFrom = labelToIndex[from];
+    int indexTo = labelToIndex[to];
 
-    vector<Edge>& e = adjList[originIndex];
+    vector<Edge>& e = adjList[indexFrom];
+    size_t before = e.size();
 
     e.erase(
         remove_if(e.begin(), e.end(),
-            [destinyIndex](const Edge& e) { return e.to == destinyIndex; }),
+            [indexTo](const Edge& e) { return e.to == indexTo; }),
         e.end());
+
+    if(e.size() == before){
+        throw runtime_error("Edge " + from + " -> " + to + " not found" );
+    }
 }

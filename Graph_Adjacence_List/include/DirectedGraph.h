@@ -8,7 +8,7 @@
 class DirectedGraph : public Graph {
    public:
     void addEdge(const string& from, const string& to, double weight = 1.0);
-    void removeEdge(const string& originLabel, const string& destinyLabel);
+    void removeEdge(const string& from, const string& to);
 };
 
 #endif

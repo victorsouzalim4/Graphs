@@ -17,11 +17,11 @@ int main(){
         g.addEdge("A", "B", 3.5);
         g.addEdge("A", "C");
         g.print();
-        g.removeEdge("A", "B");
+        g.removeEdge("B", "C");
         g.print();
 
-    } catch (const invalid_argument& e) {
-        cout << "Erro ao adicionar aresta: " << e.what() << endl;
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
     }
 
 
