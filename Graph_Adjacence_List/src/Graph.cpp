@@ -10,6 +10,7 @@
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
+#include "Edge.h"
 
 
 using namespace std;
@@ -55,7 +56,6 @@ void Graph::removeVertex(const string& label){
 int Graph::getLenght(){
     return len;
 }
-
 
 void Graph::print() const {
     for(int i = 0; i < int(adjList.size()); i++){

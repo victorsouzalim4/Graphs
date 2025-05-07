@@ -17,7 +17,8 @@ int main(){
         g.addEdge("A", "B", 3.5);
         g.addEdge("A", "C");
         g.print();
-        g.removeVertex("B");
+        g.removeEdge("A", "B");
+        g.print();
 
     } catch (const invalid_argument& e) {
         cout << "Erro ao adicionar aresta: " << e.what() << endl;
