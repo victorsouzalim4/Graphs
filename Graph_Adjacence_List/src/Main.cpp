@@ -1,12 +1,13 @@
 #include <iostream>
 #include "directed_Graph.h"
+#include "Undirected_Graph.h"
 #include "vertex.h"
 
 using namespace std;
 
 int main(){
 
-    DirectedGraph g;
+    UndirectedGraph g;
 
     g.addVertex("A");
     g.addVertex("B");
@@ -16,8 +17,7 @@ int main(){
     try {
         g.addEdge("A", "B", 3.5);
         g.addEdge("A", "C");
-        g.print();
-        g.removeEdge("B", "C");
+        g.removeEdge("C", "B");
         g.print();
 
     } catch (const exception& e) {

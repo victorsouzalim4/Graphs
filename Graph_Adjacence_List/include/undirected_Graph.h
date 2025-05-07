@@ -6,7 +6,8 @@
 
 class UndirectedGraph : public Graph {
 public:
-    //void addEdge(const std::string& from, const std::string& to) override;
+    void addEdge(const std::string& from, const std::string& to, double weight = 1.0);
+    void removeEdge(const string& from, const string& to);
 };
 
 #endif
