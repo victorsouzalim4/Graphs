@@ -17,8 +17,12 @@ int main(){
     try {
         g.addEdge("A", "B", 3.5);
         g.addEdge("A", "C");
-        g.removeEdge("C", "B");
+        //g.removeEdge("C", "B");
         g.print();
+        vector<string> nbs = g.getNeighbors("A");
+        for(string nb : nbs){
+            cout << nb << " ";
+        }
 
     } catch (const exception& e) {
         cerr << "Error: " << e.what() << endl;

@@ -56,6 +56,22 @@ int Graph::getLenght(){
     return len;
 }
 
+vector<string> Graph::getNeighbors(const string& label){
+    if(!labelToIndex.count(label)){
+        throw invalid_argument("Vertex '" + label + "' does not exists.");
+    }
+
+    int index = labelToIndex[label];
+    vector<string> neighbors;
+
+    for(Edge neighbor : adjList[index]){
+        string neighborLabel = vertices[neighbor.to].label;
+        neighbors.push_back(neighborLabel);
+    }
+
+    return neighbors;
+}
+
 void Graph::print() const {
     for(int i = 0; i < int(adjList.size()); i++){
 
