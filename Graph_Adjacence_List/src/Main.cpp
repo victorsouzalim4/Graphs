@@ -1,6 +1,6 @@
 #include <iostream>
-#include "DirectedGraph.h"
-#include "Vertex.h"
+#include "directed_Graph.h"
+#include "vertex.h"
 
 using namespace std;
 

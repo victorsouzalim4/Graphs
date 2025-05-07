@@ -27,7 +27,6 @@ class Graph {
     public:
 
         virtual int addVertex(const string& label, double heuristicWeight = 0.0);
-        // void addEdge(const string& from, const string& to);
         void removeVertex(const string& label);
         int getLenght();
         void print() const;

@@ -1,7 +1,8 @@
 #define GRAPH_INTERNAL_ACCESS
 
-#include "Graph.h"
-#include "Vertex.h"
+#include "graph.h"
+#include "vertex.h"
+#include "edge.h"
 
 #include <iostream>
 #include <memory>
@@ -10,8 +11,6 @@
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
-#include "Edge.h"
-
 
 using namespace std;
 

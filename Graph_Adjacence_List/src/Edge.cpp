@@ -1,4 +1,6 @@
-#include "Edge.h"
+#include "edge.h"
+
+using namespace std;
 
 Edge::Edge(int to, double weight) : to(to), weight(weight) {}
 
