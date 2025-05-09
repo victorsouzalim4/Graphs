@@ -23,6 +23,7 @@ class Graph {
         int len;
 
         Graph();
+        vector<Edge> getNeighborsInternal(int vertex);
 
     public:
 

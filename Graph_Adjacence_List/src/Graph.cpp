@@ -72,6 +72,22 @@ vector<string> Graph::getNeighbors(const string& label){
     return neighbors;
 }
 
+vector<Edge> Graph::getNeighborsInternal(int vertex){
+    if (vertex < 0) {
+        throw std::invalid_argument("Vertex index cannot be negative.");
+    }
+    
+    if (vertex >= vertices.size()) {
+        throw std::invalid_argument("Vertex index '" + std::to_string(vertex) + "' is out of bounds.");
+    }
+
+    if (!vertices[vertex].active) {
+        throw std::invalid_argument("Vertex at position '" + std::to_string(vertex) + "' is inactive.");
+    }
+    
+    return adjList[vertex];
+}
+
 void Graph::print() const {
     for(int i = 0; i < int(adjList.size()); i++){
 
