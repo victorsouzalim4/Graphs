@@ -184,6 +184,19 @@ make run
 
 ## 🧪 Etapa Extra: Configurar e executar testes com Google Test
 
+### 0. Instalar o CMake via MSYS2 (caso ainda não tenha)
+
+No terminal MSYS2 MinGW64, execute:
+
+```bash
+pacman -Syu             # Atualiza o sistema
+pacman -S cmake         # Instala o CMake
+```
+
+> Se o terminal fechar após o primeiro comando, reabra e continue.
+
+---
+
 ### 1. Certifique-se de que o `Main.cpp` **não esteja incluso na lib**:
 
 ```cmake
