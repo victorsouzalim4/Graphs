@@ -181,6 +181,47 @@ make run
 
 ---
 
+
+## 🧪 Etapa Extra: Configurar e executar testes com Google Test
+
+### 1. Certifique-se de que o `Main.cpp` **não esteja incluso na lib**:
+
+```cmake
+file(GLOB SRC_FILES src/*.cpp)
+list(REMOVE_ITEM SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
+add_library(graphlib ${SRC_FILES})
+```
+
+### 2. Certifique-se de que o CMake registre os testes corretamente:
+
+```cmake
+enable_testing()
+include(GoogleTest)
+gtest_discover_tests(tests)
+add_test(NAME RunTests COMMAND tests)  # fallback manual
+```
+
+### 3. Comandos para compilar e rodar testes:
+
+```bash
+cmake -S . -B build -G "Unix Makefiles"
+make -C build
+./build/tests             # Executa diretamente
+cd build && ctest --output-on-failure  # Via CTest
+```
+
+---
+
+## 🧼 Dica: reconstruir tudo do zero
+
+```bash
+rm -rf build
+cmake -S . -B build -G "Unix Makefiles"
+make -C build
+```
+
+---
+
 ## 👨‍💻 Autor
 
 Projeto desenvolvido por Victor Souza Lima.
