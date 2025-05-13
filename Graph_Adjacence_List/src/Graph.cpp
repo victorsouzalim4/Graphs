@@ -49,6 +49,8 @@ void Graph::removeVertex(const string& label){
             edges.end());
     }
 
+    labelToIndex.erase(label);
+
     len--;
 }
 
