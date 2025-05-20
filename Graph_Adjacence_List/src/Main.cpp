@@ -12,13 +12,17 @@ int main(){
     g.addVertex("A");
     g.addVertex("B");
     g.addVertex("C");
+    g.addVertex("D");
+    g.addVertex("E");
 
 
     try {
         g.addEdge("A", "B", 3.5);
-        g.addEdge("A", "C");
-        //g.removeEdge("C", "B");
-        g.getNeighbors("A");
+        g.addEdge("B", "C");
+        g.addEdge("B", "D", 2.0);
+        g.addEdge("C", "D", 4.0);
+        g.addEdge("C", "E", 3.0);
+        g.dijkstra("A", "E");
         g.print();
 
     } catch (const exception& e) {
