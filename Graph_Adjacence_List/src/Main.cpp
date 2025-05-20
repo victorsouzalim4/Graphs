@@ -18,6 +18,7 @@ int main(){
         g.addEdge("A", "B", 3.5);
         g.addEdge("A", "C");
         //g.removeEdge("C", "B");
+        g.getNeighbors("A");
         g.print();
 
     } catch (const exception& e) {

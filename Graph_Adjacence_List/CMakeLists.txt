@@ -22,7 +22,12 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Executável de testes
-add_executable(tests tests/test_graph.cpp)
+add_executable(tests
+    tests/test_directed_graph.cpp
+    tests/test_graph.cpp
+    tests/test_undirected_graph.cpp
+    #tests/test_graph_utils.cpp
+)
 
 # Linkagem
 target_link_libraries(tests graphlib gtest_main)
