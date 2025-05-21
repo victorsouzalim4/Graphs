@@ -33,6 +33,9 @@ class Graph {
         vector<string> getNeighbors(const string& label);
         pair<vector<string>, double> dijkstra(const string& from, const string& to);
 
+        unordered_map<string, int> getLabeltoIndex();
+        vector<Vertex> getVertices();
+
 };
 
 #endif

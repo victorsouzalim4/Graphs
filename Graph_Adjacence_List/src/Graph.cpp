@@ -3,6 +3,7 @@
 #include "graph.h"
 #include "vertex.h"
 #include "edge.h"
+#include "Utils/utils.h"
 
 #include <iostream>
 #include <memory>
@@ -95,6 +96,14 @@ vector<Edge> Graph::getNeighborsInternal(int vertex){
     return adjList[vertex];
 }
 
+unordered_map<string, int> Graph::getLabeltoIndex(){
+    return labelToIndex;
+}
+
+vector<Vertex> Graph::getVertices(){
+    return vertices;
+}
+
 void Graph::print() const {
     for(int i = 0; i < int(adjList.size()); i++){
 
@@ -111,14 +120,12 @@ void Graph::print() const {
 }
 
 pair<vector<string>, double> Graph::dijkstra(const string& from, const string& to){
-    Graph g = *this;
 
-    vector<pair<double, int>> d(int(adjList.size()), make_pair(numeric_limits<double>::max(), -1));
+    vector<tuple<double, int, int>> d(int(adjList.size()), make_tuple(numeric_limits<double>::max(), -1, -1));
     vector<bool> visited(vertices.size(), false);
 
-
     for(int i = 0; i < vertices.size(); i++){
-        d[i].second = i;
+        get<1>(d[i]) = i;
     }
 
     priority_queue<tuple<double, int, int>, vector<tuple<double, int, int>>, greater<tuple<double, int, int>>> minHeap;
@@ -127,7 +134,7 @@ pair<vector<string>, double> Graph::dijkstra(const string& from, const string& t
 
     tuple<double, int, int> initial (0.0, indexFrom, indexFrom);
     minHeap.push(initial);
-    d[indexFrom] = make_pair(0.0, indexFrom);
+    d[indexFrom] = make_tuple(0.0, indexFrom, indexFrom);
 
     int indexRemoved = -1;
 
@@ -143,35 +150,15 @@ pair<vector<string>, double> Graph::dijkstra(const string& from, const string& t
         vector<Edge> neighbors = adjList[get<2>(top)];
 
         for(Edge neighbor : neighbors){
-            if(d[neighbor.to].first > dist + neighbor.weight && !visited[neighbor.to]){
-                d[neighbor.to].first = dist + neighbor.weight;
+            if(get<0>(d[neighbor.to]) > dist + neighbor.weight && !visited[neighbor.to]){
+                get<0>(d[neighbor.to]) = dist + neighbor.weight;
 
-                tuple<double, int, int> newDistance (d[neighbor.to].first, u, neighbor.to);
+                tuple<double, int, int> newDistance (get<0>(d[neighbor.to]), u, neighbor.to);
+                get<2>(d[neighbor.to]) = get<2>(top);
                 minHeap.push(newDistance);
             }
         }
     }
-
-const int COL_WIDTH = 8;
-
-for (size_t i = 0; i < d.size(); i++) {
-    if (vertices[i].active) {
-        cout << setw(COL_WIDTH) << vertices[i].label << " |";
-    }
-}
-cout << "\n";
-
-for (size_t i = 0; i < d.size(); i++) {
-    if (vertices[i].active) {
-        if (d[i].first == numeric_limits<double>::max()) {
-            cout << setw(COL_WIDTH) << "INF" << " |";
-        } else {
-            cout << setw(COL_WIDTH) << fixed << setprecision(1) << d[i].first << " |";
-        }
-    }
-}
-cout << "\n";
-
-    pair<vector<string>, double> p({""}, 2.0);  
-    return p;
+  
+    return Utils::reconstructPath(*this, d, indexFrom, indexTo);
 }

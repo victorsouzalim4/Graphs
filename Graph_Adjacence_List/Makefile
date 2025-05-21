@@ -4,7 +4,7 @@ INC_DIR := include
 BUILD_DIR := build
 
 # Arquivos fonte
-SRCS := $(wildcard $(SRC_DIR)/*.cpp)
+SRCS := $(shell find $(SRC_DIR) -name '*.cpp')
 TARGET := $(BUILD_DIR)/grafos
 
 # Configuração do compilador

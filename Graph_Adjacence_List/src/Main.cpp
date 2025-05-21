@@ -22,8 +22,11 @@ int main(){
         g.addEdge("B", "D", 2.0);
         g.addEdge("C", "D", 4.0);
         g.addEdge("C", "E", 3.0);
-        g.dijkstra("A", "E");
-        g.print();
+        auto path = g.dijkstra("A", "E");
+        cout << path.second << endl;
+        for(string v : path.first){
+            cout << v << "-> ";
+        }
 
     } catch (const exception& e) {
         cerr << "Error: " << e.what() << endl;
