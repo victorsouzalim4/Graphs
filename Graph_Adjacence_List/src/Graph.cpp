@@ -125,7 +125,7 @@ pair<vector<string>, double> Graph::dijkstra(const string& from, const string& t
     vector<bool> visited(vertices.size(), false);
 
     for (int i = 0; i < vertices.size(); i++) {
-        get<1>(d[i]) = i;  // inicializa pai como ele mesmo
+        get<1>(d[i]) = i;
     }
 
     priority_queue<tuple<double, int, int>, vector<tuple<double, int, int>>, greater<>> minHeap;
@@ -195,6 +195,47 @@ pair<vector<string>, int> Graph::DFS(const string& from, const string& to){
         }
     }
 
+    if (!visited[indexTo]) {
+        return { {}, numeric_limits<int>::max()};
+    }
+
+    for(tuple<double, int, int> value : d){
+        cout << get<0>(value) << " " << get<1>(value) << " " <<get<2>(value) << endl;
+    }
+
+    return Utils::reconstructPath(*this, d, indexFrom, indexTo); 
+}
+
+pair<vector<string>, int> Graph::BFS(const string& from, const string& to){
+
+    queue<pair<int, int>> queue;
+    vector<bool> visited(vertices.size(), false);
+    vector<tuple<double, int, int>> d(int(adjList.size()), make_tuple(0, -1, 0));
+    
+    for(int i = 0; i < vertices.size(); i++) get<1>(d[i]) = i;
+
+    int indexFrom = labelToIndex[from];
+    int indexTo = labelToIndex[to];
+
+    queue.push(make_pair(indexFrom, indexFrom));
+
+    while(!queue.empty()){
+
+        auto front = queue.front();
+        int u = front.first;
+        visited[u] = true;
+        queue.pop();
+
+        if(u == indexTo) break;
+
+        for(Edge neighbor : adjList[u]){
+            if(!visited[neighbor.to]){
+                queue.push(make_pair(neighbor.to, u));
+                get<0>(d[neighbor.to]) = get<0>(d[u]) + 1;
+                get<2>(d[neighbor.to]) = u;
+            }
+        }
+    }
 
     if (!visited[indexTo]) {
         return { {}, numeric_limits<int>::max()};
