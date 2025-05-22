@@ -32,6 +32,7 @@ class Graph {
         void print() const;
         vector<string> getNeighbors(const string& label);
         pair<vector<string>, double> dijkstra(const string& from, const string& to);
+        pair<vector<string>, int> DFS(const string& from, const string& to);
 
         unordered_map<string, int> getLabeltoIndex();
         vector<Vertex> getVertices();

@@ -17,6 +17,7 @@
 #include <functional>
 #include <queue>
 #include <iomanip>
+#include <stack>
 
 using namespace std;
 
@@ -119,46 +120,89 @@ void Graph::print() const {
     }
 }
 
-pair<vector<string>, double> Graph::dijkstra(const string& from, const string& to){
-
-    vector<tuple<double, int, int>> d(int(adjList.size()), make_tuple(numeric_limits<double>::max(), -1, -1));
+pair<vector<string>, double> Graph::dijkstra(const string& from, const string& to) {
+    vector<tuple<double, int, int>> d(adjList.size(), make_tuple(numeric_limits<double>::max(), -1, 0));
     vector<bool> visited(vertices.size(), false);
 
-    for(int i = 0; i < vertices.size(); i++){
-        get<1>(d[i]) = i;
+    for (int i = 0; i < vertices.size(); i++) {
+        get<1>(d[i]) = i;  // inicializa pai como ele mesmo
     }
 
-    priority_queue<tuple<double, int, int>, vector<tuple<double, int, int>>, greater<tuple<double, int, int>>> minHeap;
+    priority_queue<tuple<double, int, int>, vector<tuple<double, int, int>>, greater<>> minHeap;
+
     int indexFrom = labelToIndex[from];
     int indexTo = labelToIndex[to];
 
-    tuple<double, int, int> initial (0.0, indexFrom, indexFrom);
-    minHeap.push(initial);
-    d[indexFrom] = make_tuple(0.0, indexFrom, indexFrom);
+    get<0>(d[indexFrom]) = 0.0;
+    get<2>(d[indexFrom]) = indexFrom;
 
-    int indexRemoved = -1;
+    minHeap.push({0.0, indexFrom, indexFrom});
 
-    while(!minHeap.empty() && indexRemoved != indexTo){
-
+    while (!minHeap.empty()) {
         auto top = minHeap.top();
         double dist = get<0>(top);
         int u = get<1>(top);
-        visited[u] = true;
-        indexRemoved = u;
         minHeap.pop();
-        
-        vector<Edge> neighbors = adjList[get<2>(top)];
 
-        for(Edge neighbor : neighbors){
-            if(get<0>(d[neighbor.to]) > dist + neighbor.weight && !visited[neighbor.to]){
+        visited[u] = true;
+
+        if (u == indexTo) break;
+
+        for (Edge neighbor : adjList[u]) {
+            if (!visited[neighbor.to] && get<0>(d[neighbor.to]) > dist + neighbor.weight) {
                 get<0>(d[neighbor.to]) = dist + neighbor.weight;
-
-                tuple<double, int, int> newDistance (get<0>(d[neighbor.to]), u, neighbor.to);
-                get<2>(d[neighbor.to]) = get<2>(top);
-                minHeap.push(newDistance);
+                get<2>(d[neighbor.to]) = u;
+                minHeap.push({get<0>(d[neighbor.to]), neighbor.to, u});
             }
         }
     }
-  
+
+    if (!visited[indexTo]) {
+        return {{}, numeric_limits<double>::max()};
+    }
+
     return Utils::reconstructPath(*this, d, indexFrom, indexTo);
+}
+
+pair<vector<string>, int> Graph::DFS(const string& from, const string& to){
+
+    stack<pair<int, int>> stack;
+    vector<bool> visited(vertices.size(), false);
+    vector<tuple<double, int, int>> d(int(adjList.size()), make_tuple(0, -1, 0));
+    
+    for(int i = 0; i < vertices.size(); i++) get<1>(d[i]) = i;
+
+    int indexFrom = labelToIndex[from];
+    int indexTo = labelToIndex[to];
+
+    stack.push(make_pair(indexFrom, indexFrom));
+
+    while(!stack.empty()){
+
+        auto top = stack.top();
+        int u = top.first;
+        visited[u] = true;
+        stack.pop();
+
+        if(u == indexTo) break;
+
+        for(Edge neighbor : adjList[u]){
+            if(!visited[neighbor.to]){
+                stack.push(make_pair(neighbor.to, u));
+                get<0>(d[neighbor.to]) = get<0>(d[u]) + 1;
+                get<2>(d[neighbor.to]) = u;
+            }
+        }
+    }
+
+
+    if (!visited[indexTo]) {
+        return { {}, numeric_limits<int>::max()};
+    }
+
+    for(tuple<double, int, int> value : d){
+        cout << get<0>(value) << " " << get<1>(value) << " " <<get<2>(value) << endl;
+    }
+
+    return Utils::reconstructPath(*this, d, indexFrom, indexTo); 
 }

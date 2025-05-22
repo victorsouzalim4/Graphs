@@ -22,7 +22,7 @@ int main(){
         g.addEdge("B", "D", 2.0);
         g.addEdge("C", "D", 4.0);
         g.addEdge("C", "E", 3.0);
-        auto path = g.dijkstra("A", "E");
+        auto path = g.DFS("A", "E");
         cout << path.second << endl;
         for(string v : path.first){
             cout << v << "-> ";
